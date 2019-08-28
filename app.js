@@ -21,6 +21,7 @@ function loadEventListeners() {
   // Clear task event
   clearBtn.addEventListener('click', clearTasks);
   // Filter tasks event
+  // The keyup event is fired when a key is released.
   filter.addEventListener('keyup', filterTasks);
 }
 
@@ -150,6 +151,9 @@ function clearTasks() {
   // taskList.innerHTML = '';
 
   // Faster
+  // Avoiding the use of innerHTML when emptying DOM elements
+  // (or anything else) can increase performance greatly.
+  // https://jsperf.com/innerhtml-vs-removechild/37
   while (taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
@@ -169,6 +173,10 @@ function filterTasks(e) {
 
   document.querySelectorAll('.collection-item').forEach(function(task) {
     const item = task.firstChild.textContent;
+    // The indexOf() method returns
+    // the first index at which a given element can be found in the array,
+    // or -1 if it is not present.
+    // If the character is found, display the respective task and hide the others
     if (item.toLowerCase().indexOf(text) != -1) {
       task.style.display = 'block';
     } else {

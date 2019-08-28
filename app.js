@@ -145,6 +145,8 @@ function removeTaskFromLocalStorage(taskItem) {
 
 // Clear Tasks
 function clearTasks() {
+  // The Element property innerHTML gets or sets the HTML
+  // or XML markup contained within the element.
   // taskList.innerHTML = '';
 
   // Faster

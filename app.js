@@ -10,6 +10,9 @@ loadEventListeners();
 
 function loadEventListeners() {
   // DOM load event
+  // The DOMContentLoaded event fires when the initial HTML document has been
+  // completely loaded and parsed, without waiting for stylesheets,
+  // images, and subframes to finish loading.
   document.addEventListener('DOMContentLoaded', getTasks);
   // Add task event
   form.addEventListener('submit', addTask);
@@ -24,12 +27,19 @@ function loadEventListeners() {
 // Get Tasks from local storage
 function getTasks() {
   let tasks;
+  // if no tasks are saved in the local storage
+  // key is 'tasks' , value is "Whatever task the user enters"
   if (localStorage.getItem('tasks') === null) {
     tasks = [];
   } else {
+    // JSON.parse removes the ""s so it converts the string into an array
+    // JSON.stringify does the opposite, it adds ""s to an array
+    // and converts it to a string
     tasks = JSON.parse(localStorage.getItem('tasks'));
   }
 
+  // This forEach loop populates the html with the key value pairs
+  // stored in the local storage
   tasks.forEach(function(task) {
     // Create li element
     const li = document.createElement('li');
@@ -99,6 +109,7 @@ function storeTaskInLocalStorage(task) {
 
   tasks.push(task);
 
+  // key is tasks, value is the stringified version of the inputted task
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
